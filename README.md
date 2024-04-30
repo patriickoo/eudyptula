@@ -1,5 +1,3 @@
----
-
 This is Task 01 of the Eudyptula Challenge
 ------------------------------------------
 
