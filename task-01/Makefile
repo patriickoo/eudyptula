@@ -25,6 +25,7 @@ clean:
 
 else
     # called from kernel build system: just declare what our modules are
+    CFLAGS_hello.o := -DDEBUG
     obj-m := hello.o
 endif
 
