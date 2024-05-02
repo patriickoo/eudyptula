@@ -19,7 +19,7 @@ modules_install:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules_install
 
 clean:
-	rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions
+	$(MAKE) -C $(KERNELDIR) M=$(PWD) clean
 
 .PHONY: modules modules_install clean
 
