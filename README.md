@@ -258,7 +258,7 @@ you will need it for this task.
 
 The task, in specifics is:
 
-  - Take the kernel module you wrote for task 01, and modify it to be
+  - Take the kernel module you wrote for task 01, and modify it to
     create a debugfs subdirectory called "eudyptula".  In that
     directory, create 3 virtual files called "id", "jiffies", and "foo".
   - The file "id" operates just like it did for example 06, use the same
@@ -268,7 +268,7 @@ The task, in specifics is:
   - The file "foo" needs to be writable only by root, but readable by
     anyone.  When writing to it, the value must be stored, up to one
     page of data.  When read, which can be done by any user, the value
-    must be returned that is stored it it.  Properly handle the fact
+    stored in it must be returned.  Properly handle the fact
     that someone could be reading from the file while someone else is
     writing to it (oh, a locking hint!)
   - When the module is unloaded, all of the debugfs files are cleaned
