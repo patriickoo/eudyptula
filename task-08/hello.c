@@ -27,7 +27,7 @@ static ssize_t id_write(struct file *filp, const char __user *buf,
 
 	ret = simple_write_to_buffer(str, count, ppos, buf, count);
 
-	pr_debug("Device received: %s\n", str);
+	pr_debug("hello: /sys/kernel/debug/eudyptula/id: received %s\n", str);
 
 	if (strncmp(str, USERID, count))
 		return -EINVAL;
@@ -58,7 +58,7 @@ static int __init hello_init(void)
 
 	debugfs_create_ulong("jiffies", 0444, ddir, &jiffies);
 
-	pr_debug("Hello, world!\n");
+	pr_debug("hello: Hello, world!\n");
 
 	return 0;
 }
@@ -66,7 +66,7 @@ static int __init hello_init(void)
 static void __exit hello_exit(void)
 {
 	debugfs_remove_recursive(ddir);
-	pr_debug("Goodbye, cruel world.\n");
+	pr_debug("hello: Goodbye, cruel world.\n");
 }
 
 module_init(hello_init);
