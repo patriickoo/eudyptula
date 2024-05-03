@@ -43,16 +43,20 @@ static const struct file_operations id_fops = {
 
 static int __init hello_init(void)
 {
+	struct dentry *debugfile;
+
 	ddir = debugfs_create_dir("eudyptula", NULL);
 
 	if (IS_ERR(ddir))
 		return PTR_ERR(ddir);
 
-	struct dentry *dfile_id = debugfs_create_file(
+	debugfile = debugfs_create_file(
 			"id", 0666, ddir, NULL, &id_fops);
 
-	if (IS_ERR(dfile_id))
-			return PTR_ERR(dfile_id);
+	if (IS_ERR(debugfile))
+		return PTR_ERR(debugfile);
+
+	debugfs_create_ulong("jiffies", 0444, ddir, &jiffies);
 
 	pr_debug("Hello, world!\n");
 
