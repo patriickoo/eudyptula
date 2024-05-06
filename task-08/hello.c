@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0+
 
 #include <linux/cleanup.h>
+#include <linux/debugfs.h>
 #include <linux/fs.h>
 #include <linux/init.h>
-#include <linux/debugfs.h>
 #include <linux/module.h>
-#include <linux/mutex.h>
+#include <linux/rwsem.h>
 #include <linux/vmalloc.h>
 
 #define USERID	"pat\n"
