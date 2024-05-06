@@ -1,0 +1,41 @@
+From 529a0e11bacec876fa9d6ae32420de8abd64dcb2 Mon Sep 17 00:00:00 2001
+From: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
+Date: Mon, 6 May 2024 17:56:50 +0200
+Subject: [PATCH] task-10: Refactor `rtl871x_cmd.c` for coding style
+
+Refactor file to comply with kernel coding style.
+Remove comment containing filename.
+Remove multi-line dereference.
+Now passes checkpatch.pl script with zero warnings.
+
+Signed-off-by: Patrick Barsanti <patrick.barsanti@amarulasolutions.com>
+---
+ task-10/rtl871x_cmd.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/task-10/rtl871x_cmd.c b/task-10/rtl871x_cmd.c
+index bbd4a13..e1cc872 100644
+--- a/task-10/rtl871x_cmd.c
++++ b/task-10/rtl871x_cmd.c
+@@ -1,6 +1,5 @@
+ // SPDX-License-Identifier: GPL-2.0
+ /******************************************************************************
+- * rtl871x_cmd.c
+  *
+  * Copyright(c) 2007 - 2010 Realtek Corporation. All rights reserved.
+  * Linux device driver for RTL8192SU
+@@ -528,8 +527,9 @@ void r8712_setstakey_cmd(struct _adapter *padapter, u8 *psta, u8 unicast_key)
+ 	if (unicast_key)
+ 		memcpy(&psetstakey_para->key, &sta->x_UncstKey, 16);
+ 	else
+-		memcpy(&psetstakey_para->key, &psecuritypriv->XGrpKey[psecuritypriv->XGrpKeyid - 1].
+-		       skey, 16);
++		memcpy(&psetstakey_para->key,
++			&psecuritypriv->XGrpKey[psecuritypriv->XGrpKeyid - 1].skey,
++			16);
+ 	r8712_enqueue_cmd(pcmdpriv, ph2c);
+ }
+ 
+-- 
+2.40.1
+
