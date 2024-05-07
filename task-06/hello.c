@@ -25,7 +25,7 @@ static ssize_t hello_misc_write(struct file *filp, const char __user *buf,
 
 	ret = simple_write_to_buffer(str, count, ppos, buf, count);
 
-	pr_debug("Device received: %s\n", str);
+	pr_debug("hello: /dev/eudyptula: device received %s", str);
 
 	if (strncmp(str, USERID, count))
 		return -EINVAL;
@@ -53,7 +53,7 @@ static int __init hello_init(void)
 	if (ret)
 		return ret;
 
-	pr_debug("Hello, world!\n");
+	pr_debug("hello: Hello, world!\n");
 
 	return ret;
 }
@@ -61,7 +61,7 @@ static int __init hello_init(void)
 static void __exit hello_exit(void)
 {
 	misc_deregister(&hello_misc);
-	pr_debug("Goodbye, cruel world.\n");
+	pr_debug("hello: Goodbye, cruel world.\n");
 }
 
 module_init(hello_init);
