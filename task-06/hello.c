@@ -8,7 +8,7 @@
 #define USERID	"pat\n"
 
 static ssize_t hello_misc_read(struct file *filp, char __user *buf,
-				size_t count, loff_t *ppos)
+			       size_t count, loff_t *ppos)
 {
 	return simple_read_from_buffer(buf, count, ppos,
 			USERID, strlen(USERID));
