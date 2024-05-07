@@ -39,7 +39,7 @@ static const struct file_operations hello_fops = {
 	.write = hello_misc_write,
 };
 
-struct miscdevice hello_misc = {
+static struct miscdevice hello_misc = {
 	.minor = MISC_DYNAMIC_MINOR,
 	.name = "eudyptula",
 	.fops = &hello_fops,
