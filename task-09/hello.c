@@ -13,7 +13,7 @@
 
 static DECLARE_RWSEM(foo_lock);
 
-static void *foo_data;
+static char foo_data[PAGE_SIZE];
 
 static struct kobject *hello_kobj;
 
@@ -87,8 +87,6 @@ static int __init hello_init(void)
 {
 	int ret;
 
-	foo_data = vmalloc(PAGE_SIZE);  /* max size is 1 page */
-	
 	hello_kobj = kobject_create_and_add("eudyptula", kernel_kobj);
 	if (!hello_kobj)
 		return -ENOMEM;
@@ -104,7 +102,6 @@ static int __init hello_init(void)
 
 static void __exit hello_exit(void)
 {
-	vfree(foo_data);
 	kobject_put(hello_kobj);
 	pr_debug("hello: Goodbye, cruel world.\n");
 }
