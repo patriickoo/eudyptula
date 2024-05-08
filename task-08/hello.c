@@ -83,13 +83,20 @@ static int __init hello_init(void)
 	debugfile = debugfs_create_file(
 			"id", 0666, ddir, NULL, &id_fops);
 
-	if (IS_ERR(debugfile))
+	if (IS_ERR(debugfile)) {
+		debugfs_remove_recursive(ddir);
 		return PTR_ERR(debugfile);
+	}
 
 	debugfs_create_ulong("jiffies", 0444, ddir, &jiffies);
 
 	debugfile = debugfs_create_file(
 			"foo", 0644, ddir, &foo_data, &foo_fops);
+
+	if (IS_ERR(debugfile)) {
+		debugfs_remove_recursive(ddir);
+		return PTR_ERR(debugfile);
+	}
 
 	pr_debug("hello: Hello, world!\n");
 
