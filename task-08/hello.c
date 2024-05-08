@@ -19,17 +19,17 @@ static ssize_t id_read(struct file *filp, char __user *buf,
 				size_t count, loff_t *ppos)
 {
 	return simple_read_from_buffer(buf, count, ppos,
-			USERID, strlen(USERID));
+				       USERID, sizeof(USERID));
 }
 
 static ssize_t id_write(struct file *filp, const char __user *buf,
 				size_t count, loff_t *ppos)
 {
-	if (count != strlen(USERID))
-		return -EINVAL;
-
-	char str[strlen(USERID)];
+	char str[sizeof(USERID)];
 	int ret;
+
+	if (count != sizeof(USERID) - 1)
+		return -EINVAL;
 
 	ret = simple_write_to_buffer(str, count, ppos, buf, count);
 
