@@ -55,7 +55,7 @@ static ssize_t foo_store(struct kobject *kobj, struct kobj_attribute *attr,
 }
 
 static ssize_t jiffies_show(struct kobject *kobj, struct kobj_attribute *attr,
-			char *buf)
+			    char *buf)
 {
 	return sysfs_emit(buf, "%ld\n", jiffies);
 }
