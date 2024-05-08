@@ -26,7 +26,7 @@ static ssize_t id_show(struct kobject *kobj, struct kobj_attribute *attr,
 static ssize_t id_store(struct kobject *kobj, struct kobj_attribute *attr,
 			const char *buf, size_t count)
 {
-	if (count != strlen(USERID))
+	if (count != sizeof(USERID) - 1)
 		return -EINVAL;
 
 	pr_debug("hello: /sys/kernel/debug/eudyptula/id: received %s", buf);
