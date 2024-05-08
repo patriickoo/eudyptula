@@ -46,10 +46,11 @@ static ssize_t foo_show(struct kobject *kobj, struct kobj_attribute *attr,
 }
 
 static ssize_t foo_store(struct kobject *kobj, struct kobj_attribute *attr,
-			const char *buf, size_t count)
+			 const char *buf, size_t count)
 {
 	guard(rwsem_write)(&foo_lock);
 	strcpy(foo_data, buf);
+
 	return count;
 }
 
