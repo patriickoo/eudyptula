@@ -16,14 +16,14 @@ static char foo_data[PAGE_SIZE];
 static int foo_data_len;
 
 static ssize_t id_read(struct file *filp, char __user *buf,
-				size_t count, loff_t *ppos)
+		       size_t count, loff_t *ppos)
 {
 	return simple_read_from_buffer(buf, count, ppos,
 				       USERID, sizeof(USERID));
 }
 
 static ssize_t id_write(struct file *filp, const char __user *buf,
-				size_t count, loff_t *ppos)
+			size_t count, loff_t *ppos)
 {
 	char str[sizeof(USERID)];
 	int ret;
@@ -47,7 +47,7 @@ static ssize_t foo_read(struct file *filp, char __user *buf,
 	guard(rwsem_read)(&foo_lock);
 
 	return simple_read_from_buffer(buf, count, ppos,
-			foo_data, foo_data_len);
+				       foo_data, foo_data_len);
 }
 
 static ssize_t foo_write(struct file *filp, const char __user *buf,
@@ -55,6 +55,7 @@ static ssize_t foo_write(struct file *filp, const char __user *buf,
 {
 	guard(rwsem_write)(&foo_lock);
 	foo_data_len = count;
+
 	return simple_write_to_buffer(foo_data, PAGE_SIZE, ppos, buf, count);
 }
 
