@@ -18,7 +18,7 @@ static void *foo_data;
 static struct kobject *hello_kobj;
 
 static ssize_t id_show(struct kobject *kobj, struct kobj_attribute *attr,
-			char *buf)
+		       char *buf)
 {
 	return sysfs_emit(buf, USERID);
 }
