@@ -59,18 +59,9 @@ static ssize_t jiffies_show(struct kobject *kobj, struct kobj_attribute *attr,
 	return sysfs_emit(buf, "%ld\n", jiffies);
 }
 
-static ssize_t jiffies_store(struct kobject *kobj, struct kobj_attribute *attr,
-			const char *buf, size_t count)
-{
-	return -EINVAL;
-}
-
-static struct kobj_attribute id_attr =
-	__ATTR(id, 0664, id_show, id_store);
-static struct kobj_attribute jiffies_attr =
-	__ATTR(jiffies, 0444, jiffies_show, jiffies_store);
-static struct kobj_attribute foo_attr =
-	__ATTR(foo, 0644, foo_show, foo_store);
+static struct kobj_attribute id_attr = __ATTR(id, 0664, id_show, id_store);
+static struct kobj_attribute jiffies_attr = __ATTR_RO(jiffies);
+static struct kobj_attribute foo_attr = __ATTR_RW(foo);
 
 static struct attribute *attrs[] = {
 	&id_attr.attr,
