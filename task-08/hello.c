@@ -6,14 +6,13 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/rwsem.h>
-#include <linux/vmalloc.h>
 
 #define USERID	"pat\n"
 
 static DECLARE_RWSEM(foo_lock);
 
 static struct dentry *ddir;
-static void *foo_data;
+static char foo_data[PAGE_SIZE];
 static int foo_data_len;
 
 static ssize_t id_read(struct file *filp, char __user *buf,
@@ -88,8 +87,6 @@ static int __init hello_init(void)
 
 	debugfs_create_ulong("jiffies", 0444, ddir, &jiffies);
 
-	foo_data = vmalloc(PAGE_SIZE);  /* max size is 1 page */
-
 	debugfile = debugfs_create_file(
 			"foo", 0644, ddir, &foo_data, &foo_fops);
 
@@ -100,7 +97,6 @@ static int __init hello_init(void)
 
 static void __exit hello_exit(void)
 {
-	vfree(foo_data);
 	debugfs_remove_recursive(ddir);
 	pr_debug("hello: Goodbye, cruel world.\n");
 }
