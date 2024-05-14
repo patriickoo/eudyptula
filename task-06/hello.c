@@ -11,16 +11,16 @@ static ssize_t hello_misc_read(struct file *filp, char __user *buf,
 			       size_t count, loff_t *ppos)
 {
 	return simple_read_from_buffer(buf, count, ppos,
-				       USERID, strlen(USERID));
+				       USERID, sizeof(USERID));
 }
 
 static ssize_t hello_misc_write(struct file *filp, const char __user *buf,
 				size_t count, loff_t *ppos)
 {
-	char str[strlen(USERID)];
+	char str[sizeof(USERID)];
 	int ret;
 
-	if (count != strlen(USERID))
+	if (count != sizeof(USERID) - 1)
 		return -EINVAL;
 
 	ret = simple_write_to_buffer(str, count, ppos, buf, count);
